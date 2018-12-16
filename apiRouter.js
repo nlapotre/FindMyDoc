@@ -6,6 +6,7 @@ exports.router = (function(){
 
   apiRouter.route('/doctor/register/').post(doctorCtrl.register);
   apiRouter.route('/doctor/login/').post(doctorCtrl.login);
+  apiRouter.route('/doctor/infos/').get(doctorCtrl.getDoctorInfos);
 
   return apiRouter;
 })();
