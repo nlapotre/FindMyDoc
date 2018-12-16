@@ -1,12 +1,11 @@
 const express = require('express');
-const doctorCtrl = require ('./routes/doctorCtrl');
+const doctorRouter = require('./routes/doctorRouter').router;
+const patientRouter = require('./routes/patientRouter').router;
 
-exports.router = (function(){
+
+exports.router = (() => {
   var apiRouter = express.Router();
-
-  apiRouter.route('/doctor/register/').post(doctorCtrl.register);
-  apiRouter.route('/doctor/login/').post(doctorCtrl.login);
-  apiRouter.route('/doctor/infos/').get(doctorCtrl.getDoctorInfos);
-
+  apiRouter.use('/doctor/', doctorRouter);
+  apiRouter.use('/patient/', patientRouter);
   return apiRouter;
 })();
