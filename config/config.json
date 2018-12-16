@@ -1,22 +1,22 @@
 {
   "development": {
     "username": "root",
-    "password": null,
-    "database": "database_development",
+    "password": "mdp",
+    "database": "database_development_findmydoc",
     "host": "127.0.0.1",
     "dialect": "mysql"
   },
   "test": {
     "username": "root",
-    "password": null,
-    "database": "database_test",
+    "password": "mdp",
+    "database": "database_test_findmydoc",
     "host": "127.0.0.1",
     "dialect": "mysql"
   },
   "production": {
     "username": "root",
-    "password": null,
-    "database": "database_production",
+    "password": "mdp",
+    "database": "database_production_findmydoc",
     "host": "127.0.0.1",
     "dialect": "mysql"
   }
