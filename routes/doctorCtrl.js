@@ -1,5 +1,5 @@
 const bcrypt = require('bcrypt');
-const jwt = require('jsonwebtoken');
+const jwtUtils = require('../utils/jwt.utils');
 const models = require('../models');
 
 module.exports = {
@@ -36,22 +36,51 @@ module.exports = {
               'name': newDoctor.firstName
             })
           .catch((err) => {
-            return res.status(500).json({'error' : 'unable to create user   '});
+            res.status(500).json({'error' : 'unable to create user  '});
           })
           })
         });
       }
       else{
-        return res.status(409).json({'error' : 'user already exists'});
+        res.status(409).json({'error' : 'user already exists'});
       }
 
     })
     .catch((err)=> {
-      return res.status(500).json({'error' : 'unable to verify user   '});
+      res.status(500).json({'error' : 'unable to verify user   '});
     })
   },
-  login: (req, res) => {
 
+
+
+
+  login: (req, res) => {
+      var login = req.body.login;
+      var password = req.body.password;
+
+      models.Doctor.findOne({
+        where: {login: login}
+      })
+      .then((doctorFound) => {
+        if(doctorFound){
+          bcrypt.compare(password, doctorFound.password, (errBcrypt, resBcrypt)=>{
+            if(resBcrypt){
+              res.status(200).json({
+                'ID': doctorFound.id,
+                'token': jwtUtils.generateToken(doctorFound)
+              });
+            }
+            else{
+              res.status(403).json({'error' : 'invalid password'});
+            }
+          })
+        }else{
+          res.status(409).json({'error' : 'user does not exists'});
+        }
+      })
+      .catch((err)=>{
+        res.status(500).json({'error' : 'unable to verify user   '});
+      })
   }
 
 }
