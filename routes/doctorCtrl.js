@@ -3,7 +3,7 @@ const jwtUtils = require('../utils/jwt.utils');
 const models = require('../models');
 
 module.exports = {
-  register: (req, res, next) => {
+  register: (req, res) => {
     var firstName = req.body.firstName;
     var lastName = req.body.lastName;
     var login = req.body.login;
