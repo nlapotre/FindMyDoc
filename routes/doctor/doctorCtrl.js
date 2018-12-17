@@ -1,37 +1,39 @@
 const bcrypt = require('bcrypt');
-const jwtUtils = require('../utils/jwt.utils');
-const models = require('../models');
+const jwtUtils = require('../../utils/jwt.utils');
+const models = require('../../models');
 
 module.exports = {
-  register: (req, res, next) => {
+  register: (req, res) => {
     var firstName = req.body.firstName;
     var lastName = req.body.lastName;
     var login = req.body.login;
     var password = req.body.password;
+    var specialty = req.body.specialty;
     var postalCode = req.body.postalCode;
     var mail = req.body.mail;
     var tel = req.body.tel;
 
-    models.Patient.findOne({
+    models.Doctor.findOne({
       attributes: ['login'],
       where: { login: login }
     })
-    .then((patientFound) => {
-      if(!patientFound){
+    .then((doctorFound) => {
+      if(!doctorFound){
         bcrypt.hash(password, 5, (err, bcryptedPassword ) => {
-          var newPatient = models.Patient.create({
+          var newDoctor = models.Doctor.create({
             firstName: firstName,
             lastName: lastName,
             login: login,
             password: bcryptedPassword,
+            specialty: specialty,
             postalCode: postalCode,
             mail: mail,
             tel: tel
           })
-          .then((newPatient) => {
+          .then((newDoctor) => {
             return res.status(201).json({
-              'ID': newPatient.id,
-              'name': newPatient.firstName
+              'ID': newDoctor.id,
+              'name': newDoctor.firstName
             })
           .catch((err) => {
             res.status(500).json({'error' : 'unable to create user  '});
@@ -56,16 +58,16 @@ module.exports = {
       var login = req.body.login;
       var password = req.body.password;
 
-      models.Patient.findOne({
+      models.Doctor.findOne({
         where: {login: login}
       })
-      .then((patientFound) => {
-        if(patientFound){
-          bcrypt.compare(password, patientFound.password, (errBcrypt, resBcrypt)=>{
+      .then((doctorFound) => {
+        if(doctorFound){
+          bcrypt.compare(password, doctorFound.password, (errBcrypt, resBcrypt)=>{
             if(resBcrypt){
               res.status(200).json({
-                'ID': patientFound.id,
-                'token': jwtUtils.generateToken(patientFound)
+                'ID': doctorFound.id,
+                'token': jwtUtils.generateToken(doctorFound)
               });
             }
             else{
@@ -82,19 +84,19 @@ module.exports = {
   },
 
 
-  getPatientInfos: (req, res) =>{
+  getDoctorInfos: (req, res) =>{
     var headerAuth = req.headers['authorization'];
-    var patientId = jwtUtils.getUserId(headerAuth);
+    var doctorId = jwtUtils.getUserId(headerAuth);
 
-    if(patientId < 0){
+    if(doctorId < 0){
       res.status(400).json({'error' : 'wrong token'});
     }
-    models.Patient.findOne({
+    models.Doctor.findOne({
       attributes: ['id', 'mail', 'firstName'],
-      where: {id: patientId }
-    }).then((patient)=> {
-      if (patient){
-        res.status(201).json(patient);
+      where: {id: doctorId }
+    }).then((doctor)=> {
+      if (doctor){
+        res.status(201).json(doctor);
       }
       else{
         res.status(404).json({'error': 'user not found'});
