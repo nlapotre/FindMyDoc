@@ -102,5 +102,26 @@ module.exports = {
     }).catch((err) => {
       res.status(500).json({'error': 'cannot fetch user'});
     });
+  },
+
+  getPatientInfosFromId: (req, res) =>{
+    var patientId = req.body.id;
+
+    if(patientId < 0){
+      res.status(400).json({'error' : 'wrong token'});
+    }
+    models.Patient.findOne({
+      attributes: ['id', 'mail', 'firstName'],
+      where: {id: patientId }
+    }).then((patient)=> {
+      if (patient){
+        res.status(201).json(patient);
+      }
+      else{
+        res.status(404).json({'error': 'user not found'});
+      }
+    }).catch((err) => {
+      res.status(500).json({'error': 'cannot fetch user'});
+    });
   }
 }
