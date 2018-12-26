@@ -8,6 +8,8 @@ const app = express();
   app.use(bodyParser.urlencoded({extended : true}));
   app.use(bodyParser.json());
 
+
+
 //routes
 app.get('/', (req, res) => res.json({}));
 app.use('/api/', apiRouter);
