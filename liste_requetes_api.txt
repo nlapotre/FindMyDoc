@@ -1,0 +1,23 @@
+Liste des requêtes de l'API : 
+
+Doctor : 
+- Register -> inscription
+- Login -> connexion 
+- Infos -> récupère les infos du profil 
+
+
+Patient : 
+- Register -> inscription
+- Login -> connexion 
+- Infos -> récupère les infos du profil 
+
+DoctorPatient : 
+- Create -> créer la relation Patient/docteur
+- getPatients -> renvoie la liste des ids des patients à partir de l'id d'un docteur
+
+Appointment : 
+- Create -> créer le rdv
+ = GetDoctorAppForTheDay -> renvoie la liste des rdvs d'un médecin concernant une date renseignée 
+ = GetDoctorApp -> renvoie la liste de tous les rdvs d'un medecin (on peut entrer une date max ou min) 
+ = GetPatientApp -> renvoie la liste de tous les rdvs d'un patient (on peut entrer une date max ou min) 
+ = getPatientFromDoctorApp -> renvoie la liste de tous les rdvs d'un patient avec un certain médecin
