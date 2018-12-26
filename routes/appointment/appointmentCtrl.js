@@ -43,16 +43,58 @@ module.exports = {
   },
 
 
-  getPatients: (req, res) => {
-    var doctorId = req.query.id;
+  getDoctorAppForTheDay: (req, res) => {
+    var doctorId = req.query.doctorId;
+    var appDate = req.query.appDate;
 
-    models.DoctorPatient.findAll({
-      attributes: ['patientId'],
-      where: {doctorId: doctorId}
-    }).then((patients) => {
-      res.status(201).json(patients);
+    models.Appointment.findAll({
+      attributes: ['doctorId', 'patientId', 'appTime', 'comment'],
+      where: {doctorId: doctorId, appDate: appDate}
+    }).then((appointments) => {
+      res.status(201).json(appointments);
     }).catch((err)=> {
-      res.status(404).json({'error': 'could not find patients'});
+      res.status(404).json({'error': 'could not find appointments'});
+    });
+  },
+
+  getDoctorApp: (req, res) => {
+    var doctorId = req.query.doctorId;
+
+    models.Appointment.findAll({
+      attributes: ['doctorId', 'patientId', 'appDate', 'appTime', 'comment'],
+      where: {doctorId: doctorId}
+    }).then((appointments) => {
+      res.status(201).json(appointments);
+    }).catch((err)=> {
+      res.status(404).json({'error': 'could not find appointments'});
+    });
+  },
+
+  getPatientApp: (req, res) => {
+    var patientId = req.query.patientId;
+
+    models.Appointment.findAll({
+      attributes: ['doctorId', 'patientId', 'appDate', 'appTime', 'comment'],
+      where: {patientId: patientId}
+    }).then((appointments) => {
+      res.status(201).json(appointments);
+    }).catch((err)=> {
+      res.status(404).json({'error': 'could not find appointments'});
+    });
+  },
+
+  getPatientFromDoctorApp: (req, res) => {
+    var doctorId = req.query.doctorId;
+    var patientId = req.query.patientId;
+
+    models.Appointment.findAll({
+      attributes: ['doctorId', 'patientId', 'appDate', 'appTime', 'comment'],
+      where: {doctorId: doctorId, patientId: patientId}
+    }).then((appointments) => {
+      res.status(201).json(appointments);
+    }).catch((err)=> {
+      res.status(404).json({'error': 'could not find appointments'});
     });
   }
+
 }
