@@ -4,7 +4,7 @@ Doctor :
 - Register -> inscription
 - Login -> connexion 
 - Infos -> récupère les infos du profil 
-
+- récupérer liste des docteurs 
 
 Patient : 
 - Register -> inscription
@@ -28,7 +28,7 @@ NOTES :
 installer l'extension Allow-Control-Allow-Origin à Chrome
 
 Contrôles de formulaires
-Vérifier que le Token est toujours valable
+Vérifier que le Token est toujours valable  ---> se fait dans les requête API (Header Authorization, voir les requêtes "infos")
 Messages d'erreur (connexion, formulaire non valable, utilisateur déjà créé) 
 Navbar 
 Liste médecins, création de rdv

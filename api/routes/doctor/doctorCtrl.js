@@ -83,6 +83,15 @@ module.exports = {
       })
   },
 
+  getDoctors: (req, res) => {
+    models.Doctor.findAll({
+      attributes: ['firstName', 'lastName', 'specialty']
+    }).then((doctors) => {
+      res.status(201).json(doctors);
+    }).catch((err)=> {
+      res.status(404).json({'error': 'could not find doctors'});
+    });
+  },
 
   getDoctorInfos: (req, res) =>{
     var headerAuth = req.headers['authorization'];

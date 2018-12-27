@@ -35,7 +35,7 @@ export class Signup extends React.Component {
             mail: this.state.mail,
             tel: this.state.tel
         }
-        API.signup(_send).then(function(data){
+        API.register(_send).then(function(data){
             window.location = "/"
         },function(error){
             console.log(error);

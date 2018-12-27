@@ -27,10 +27,10 @@
 //
 // export default App;
 import React, { Component } from 'react';
-import {Header} from './components/navBar.js';
+import {Header, Footer} from './components/navBar.js';
 
 import {BrowserRouter, Route, Switch } from 'react-router-dom';
-import { Dashboard } from './components/dashboard/dashboard.js';
+import { Home } from './components/home/home.js';
 import { Login } from './components/login/login.js';
 import { Signup } from './components/register/register.js';
 import { PrivateRoute } from './components/privateRoute.js';
@@ -47,10 +47,11 @@ class App extends Component {
                 <Switch>
                     <Route exact path="/" component={Login}/>
                     <Route exact path ="/register" component={Signup}/>
-                    <PrivateRoute path='/dashboard' component={Dashboard} />
+                    <PrivateRoute path='/home' component={Home} />
                 </Switch>
               </BrowserRouter>
             </div>
+            <Footer className="Footer"/>
         </div>
         );
     }
