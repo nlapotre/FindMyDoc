@@ -1,12 +1,18 @@
 import React from 'react';
 import { Button, FormGroup, FormControl, ControlLabel } from "react-bootstrap";
+import '../../styles/button.css';
 import API from '../../utils/API';
 
 export class Signup extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            email : "",
+            firstName: "",
+            lastName: "",
+            login: "",
+            postalCode: "",
+            mail : "",
+            tel: "",
             password: "",
             cpassword: ""
         }
@@ -14,19 +20,23 @@ export class Signup extends React.Component {
         this.send.bind(this);
     }
     send = event => {
-        if(this.state.email.length === 0){
+        if(this.state.mail.length === 0){
             return;
         }
         if(this.state.password.length === 0 || this.state.password !== this.state.cpassword){
             return;
         }
         var _send = {
-            email: this.state.email,
-            password: this.state.password
+            firstName: this.state.firstName,
+            lastName: this.state.lastName,
+            login: this.state.login,
+            password: this.state.password,
+            postalCode: this.state.postalCode,
+            mail: this.state.mail,
+            tel: this.state.tel
         }
         API.signup(_send).then(function(data){
-            localStorage.setItem('token', data.data.token);
-            window.location = "/dashboard"
+            window.location = "/"
         },function(error){
             console.log(error);
             return;
@@ -40,9 +50,29 @@ export class Signup extends React.Component {
     render() {
         return(
             <div className="Login">
-                <FormGroup controlId="email" bsSize="large">
+                <FormGroup controlId="firstName" bsSize="large">
+                <ControlLabel>First Name</ControlLabel>
+                <FormControl autoFocus type="text" value={this.state.firstName} onChange={this.handleChange}/>
+                </FormGroup>
+                <FormGroup controlId="lastName" bsSize="large">
+                <ControlLabel>Last Name</ControlLabel>
+                <FormControl autoFocus type="text" value={this.state.lastName} onChange={this.handleChange}/>
+                </FormGroup>
+                <FormGroup controlId="postalCode" bsSize="large">
+                <ControlLabel>Postal Code</ControlLabel>
+                <FormControl autoFocus type="text" value={this.state.postalCode} onChange={this.handleChange}/>
+                </FormGroup>
+                <FormGroup controlId="mail" bsSize="large">
                 <ControlLabel>Email</ControlLabel>
-                <FormControl autoFocus type="email" value={this.state.email} onChange={this.handleChange}/>
+                <FormControl autoFocus type="mail" value={this.state.mail} onChange={this.handleChange}/>
+                </FormGroup>
+                <FormGroup controlId="tel" bsSize="large">
+                <ControlLabel>Telephone</ControlLabel>
+                <FormControl autoFocus type="tel" value={this.state.tel} onChange={this.handleChange}/>
+                </FormGroup>
+                <FormGroup controlId="login" bsSize="large">
+                <ControlLabel>Login</ControlLabel>
+                <FormControl autoFocus type="text" value={this.state.login} onChange={this.handleChange}/>
                 </FormGroup>
                 <FormGroup controlId="password" bsSize="large">
                 <ControlLabel>Password</ControlLabel>
@@ -52,12 +82,7 @@ export class Signup extends React.Component {
                 <ControlLabel>Confirm Password</ControlLabel>
                 <FormControl value={this.state.cpassword} onChange={this.handleChange} type="password"/>
                 </FormGroup>
-                <Button
-                onClick={this.send}
-                block
-                bsSize="large"
-                type="submit"
-                >
+                <Button className="myBtn" onClick={this.send} block bsSize="large" bsStyle="primary" type="submit">
                 Inscription
                 </Button>
             </div>

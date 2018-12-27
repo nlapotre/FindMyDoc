@@ -14,7 +14,7 @@ export default {
         })
     },
     signup : function(send){
-        return axios.post(burl + '/user/signup',send,{headers: headers})
+        return axios.post(burl + '/api/patient/register',send,{headers: headers})
     },
 
     isAuth : function() {

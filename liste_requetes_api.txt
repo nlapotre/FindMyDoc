@@ -18,6 +18,17 @@ DoctorPatient :
 Appointment : 
 - Create -> créer le rdv
  = GetDoctorAppForTheDay -> renvoie la liste des rdvs d'un médecin concernant une date renseignée 
- = GetDoctorApp -> renvoie la liste de tous les rdvs d'un medecin (on peut entrer une date max ou min) 
- = GetPatientApp -> renvoie la liste de tous les rdvs d'un patient (on peut entrer une date max ou min) 
+ = GetDoctorApp -> renvoie la liste de tous les rdvs d'un medecin 
+ = GetPatientApp -> renvoie la liste de tous les rdvs d'un patient 
  = getPatientFromDoctorApp -> renvoie la liste de tous les rdvs d'un patient avec un certain médecin
+
+
+
+NOTES : 
+installer l'extension Allow-Control-Allow-Origin à Chrome
+
+Contrôles de formulaires
+Vérifier que le Token est toujours valable
+Messages d'erreur (connexion, formulaire non valable, utilisateur déjà créé) 
+Navbar 
+Liste médecins, création de rdv

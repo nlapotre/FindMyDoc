@@ -27,6 +27,8 @@
 //
 // export default App;
 import React, { Component } from 'react';
+import {Header} from './components/navBar.js';
+
 import {BrowserRouter, Route, Switch } from 'react-router-dom';
 import { Dashboard } from './components/dashboard/dashboard.js';
 import { Login } from './components/login/login.js';
@@ -38,6 +40,8 @@ class App extends Component {
         render() {
         return (
         <div className="App">
+        <Header className="Header"/>
+
             <div className="App-content">
               <BrowserRouter>
                 <Switch>
