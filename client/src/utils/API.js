@@ -16,11 +16,15 @@ export default {
     register : function(send){
         return axios.post(burl + '/api/patient/register',send,{headers: headers})
     },
-    
+
     getDoctors : function(){
       return fetch(burl + '/api/doctor/all', {},
        {headers: headers})
      },
+     getDoctorInfos : function(id){
+       return fetch(burl + '/api/doctor/infos?id=' + id,
+        {headers: headers})
+      },
 
     isAuth : function() {
         return (localStorage.getItem('token') !== null);

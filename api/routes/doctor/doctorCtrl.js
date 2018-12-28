@@ -94,14 +94,13 @@ module.exports = {
   },
 
   getDoctorInfos: (req, res) =>{
-    var headerAuth = req.headers['authorization'];
-    var doctorId = jwtUtils.getUserId(headerAuth);
+    var doctorId = req.query.id;
 
     if(doctorId < 0){
-      res.status(400).json({'error' : 'wrong token'});
+      res.status(400).json({'error' : 'wrong id'});
     }
     models.Doctor.findOne({
-      attributes: ['id', 'mail', 'firstName'],
+      attributes: ['id', 'lastName', 'firstName','specialty'],
       where: {id: doctorId }
     }).then((doctor)=> {
       if (doctor){

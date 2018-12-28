@@ -7,6 +7,7 @@ module.exports = {
       var patientId = req.body.patientId;
       var appDate = req.body.appDate;
       var appTime = req.body.appTime;
+      var comment = req.body.comment;
 
       models.Appointment.findOne({
         attributes: ['doctorId', 'patientId', 'appDate', 'appTime'],
@@ -18,14 +19,16 @@ module.exports = {
             doctorId: doctorId,
             patientId: patientId,
             appDate: appDate,
-            appTime: appTime
+            appTime: appTime,
+            comment: comment
           })
           .then((newOne)=> {
             return res.status(201).json({
               'DoctorId': newOne.doctorId,
               'PatientId': newOne.patientId,
               'appDate': newOne.appDate,
-              'appTime': newOne.appTime
+              'appTime': newOne.appTime,
+              'comment': newOne.comment
             })
             .catch((err) => {
               res.status(500).json({'error' : 'unable to create user  '});
