@@ -85,7 +85,7 @@ module.exports = {
 
   getDoctors: (req, res) => {
     models.Doctor.findAll({
-      attributes: ['firstName', 'lastName', 'specialty']
+      attributes: ['id', 'firstName', 'lastName', 'specialty']
     }).then((doctors) => {
       res.status(201).json(doctors);
     }).catch((err)=> {

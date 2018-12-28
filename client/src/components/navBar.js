@@ -20,12 +20,15 @@ export {Header};
 var bool = API.isAuth()? 'true':'false';
 
 class Footer extends Component {
-
+  disconnect = event => {
+         API.logout();
+         window.location = "/";
+     }
   render()  {
 
     return(
-      <Navbar className="navbar" fixedBottom="true">
-      <div className={ this.isAuth ? '':''}>
+      <Navbar className="navbar" fixedBottom>
+      <div>
         <Navbar.Collapse>
           <Navbar.Form pullLeft>
             <Button onClick={this.disconnect} type="submit">Se déconnecter</Button>

@@ -1,43 +1,32 @@
 import React from 'react';
-import { Button, ListGroup, ListGroupItem, Panel } from "react-bootstrap";
-import API from '../../utils/API';
+import { Button, ListGroup, ListGroupItem, Panel, Grid, Row, Col, Thumbnail } from "react-bootstrap";
+import rdv from '../../rdv.jpg';
+import listRdv from '../../listRdv.jpg';
+import '../../styles/home.css';
+
+
 
 
 export class Home extends React.Component {
-  constructor(props){
-      super(props);
-      this.state = {
-        items: []
-      };
-
-  }
-  getDoctors(){
-    API.getDoctors().then(function(data){
-      console.log(data.data);
-    },function(error){
-        console.log(error);
-        return;
-    })
-    }
-
-
 
     render() {
         return(
-            <div className="Home">
+            <div className="Home" >
                 <h1>Home</h1>
-                <Panel className="homePanel" bsStyle="primary">
-                    <Panel.Heading >
-                      <Panel.Title componentClass="h3">Panel heading</Panel.Title>
-                    </Panel.Heading>
-                    <Panel.Body>
-                      <ListGroup>
-                      <ListGroupItem onClick=""> <h1>Title</h1><p>not title</p> </ListGroupItem>
-                        {this.getDoctors()}
-                      </ListGroup>
-                    </Panel.Body>
-                </Panel>
-
+        <Grid className="myGrid">
+                    <Row>
+                      <Col xs={6}>
+                        <Thumbnail href="#" alt="171x180" src={listRdv}>
+                        <h3>Voir mes rendez-vous</h3>
+                        </Thumbnail>
+                      </Col>
+                      <Col xs={6}>
+                        <Thumbnail href="/rdv" alt="171x180" src={rdv} >
+                        <h3>Prendre un rendez-vous</h3>
+                        </Thumbnail>
+                      </Col>
+                    </Row>
+                </Grid>
             </div>
         )
     }

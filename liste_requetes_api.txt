@@ -1,34 +1,33 @@
-Liste des requêtes de l'API : 
+Liste des requï¿½tes de l'API :
 
-Doctor : 
+Doctor :
 - Register -> inscription
-- Login -> connexion 
-- Infos -> récupère les infos du profil 
-- récupérer liste des docteurs 
+- Login -> connexion
+- Infos -> rï¿½cupï¿½re les infos du profil
+- rï¿½cupï¿½rer liste des docteurs
 
-Patient : 
+Patient :
 - Register -> inscription
-- Login -> connexion 
-- Infos -> récupère les infos du profil 
+- Login -> connexion
+- Infos -> rï¿½cupï¿½re les infos du profil
 
-DoctorPatient : 
-- Create -> créer la relation Patient/docteur
-- getPatients -> renvoie la liste des ids des patients à partir de l'id d'un docteur
+DoctorPatient :
+- Create -> crï¿½er la relation Patient/docteur
+- getPatients -> renvoie la liste des ids des patients ï¿½ partir de l'id d'un docteur
 
-Appointment : 
-- Create -> créer le rdv
- = GetDoctorAppForTheDay -> renvoie la liste des rdvs d'un médecin concernant une date renseignée 
- = GetDoctorApp -> renvoie la liste de tous les rdvs d'un medecin 
- = GetPatientApp -> renvoie la liste de tous les rdvs d'un patient 
- = getPatientFromDoctorApp -> renvoie la liste de tous les rdvs d'un patient avec un certain médecin
+Appointment :
+- Create -> crï¿½er le rdv
+ = GetDoctorAppForTheDay -> renvoie la liste des rdvs d'un mï¿½decin concernant une date renseignï¿½e
+ = GetDoctorApp -> renvoie la liste de tous les rdvs d'un medecin
+ = GetPatientApp -> renvoie la liste de tous les rdvs d'un patient
+ = getPatientFromDoctorApp -> renvoie la liste de tous les rdvs d'un patient avec un certain mï¿½decin
 
 
 
-NOTES : 
-installer l'extension Allow-Control-Allow-Origin à Chrome
+NOTES :
+installer l'extension Allow-Control-Allow-Origin ï¿½ Chrome
 
-Contrôles de formulaires
-Vérifier que le Token est toujours valable  ---> se fait dans les requête API (Header Authorization, voir les requêtes "infos")
-Messages d'erreur (connexion, formulaire non valable, utilisateur déjà créé) 
-Navbar 
-Liste médecins, création de rdv
+Contrï¿½les de formulaires
+Vï¿½rifier que le Token est toujours valable  ---> se fait dans les requï¿½te API (Header Authorization, voir les requï¿½tes "infos")
+Messages d'erreur (connexion, formulaire non valable, utilisateur dï¿½jï¿½ crï¿½ï¿½) 
+Liste mï¿½decins, crï¿½ation de rdv
