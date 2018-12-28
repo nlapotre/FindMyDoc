@@ -15,12 +15,37 @@ export class Doctor extends React.Component {
         comment: ""
       }
       this.getDoctorInfos(this.state.doctorId);
+      this.handleChange.bind(this);
+      this.send.bind(this);
   }
 
 getDoctorInfos(id){
   API.getDoctorInfos(id)
   .then(res => res.json())
   .then(res => this.setState({'doctor': res}));
+}
+
+send = event => {
+  var _send = {
+      doctorId: this.state.doctorId,
+      patientId:localStorage.getItem('patientId'),
+      appDate:this.state.appDate,
+      appTime:this.state.appTime,
+      comment:this.state.comment
+  }
+    API.createAppointment(_send).then(function(data){
+      if(data.status === 201){
+        window.location = "/home"
+      }
+    },function(error){
+        console.log(error);
+        return;
+    })
+}
+handleChange = event => {
+    this.setState({
+        [event.target.id]: event.target.value
+    });
 }
 
     render() {
