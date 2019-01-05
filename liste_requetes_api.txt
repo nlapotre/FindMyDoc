@@ -1,4 +1,4 @@
-Liste des requ�tes de l'API :
+﻿Liste des requ�tes de l'API :
 
 Doctor :
 - Register -> inscription
@@ -31,3 +31,6 @@ Contr�les de formulaires
 V�rifier que le Token est toujours valable  ---> se fait dans les requ�te API (Header Authorization, voir les requ�tes "infos")
 Messages d'erreur (connexion, formulaire non valable, utilisateur d�j� cr��) 
 Liste m�decins, cr�ation de rdv
+
+
+database_development_findmydoc
