@@ -5,6 +5,8 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import org.json.simple.parser.ParseException;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -42,17 +44,18 @@ public class LoginController implements Initializable {
 	  
 	   
 	 
-	   public void loginAction(ActionEvent event) throws IOException {
+	   public void loginAction(ActionEvent event) throws IOException, ParseException {
 	       System.out.println("Button Clicked!");
 	        Api app = new Api();
-	      
-	        if (app.login(txt_login.getText(), txt_password.getText())){
+	        int id = app.login(txt_login.getText(), txt_password.getText());
+	        if (id != 0){
 	        	System.out.println("Authentication success");
 	        	 AnchorPane root =  FXMLLoader.load(getClass()
 	                     .getResource("/views/Home.fxml"));
 	  			Scene scene = new Scene(root);
 	  			Stage stage = (Stage) btn_login.getScene().getWindow();
 	  			stage.setTitle("Accueil");
+	  			stage.setUserData(id);
 	  			stage.setScene(scene);
 	        	
 	        }

@@ -1,0 +1,88 @@
+package models;
+
+import java.util.ArrayList;
+import java.util.Iterator;
+
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
+
+public class Appointment {
+	private int patientId;
+	private int doctorId;
+	private String appDate;
+	private int appTime;
+	private String comment;
+	
+	
+	public int getPatientId() {
+		return patientId;
+	}
+
+
+	public int getDoctorId() {
+		return doctorId;
+	}
+
+
+	public String getAppDate() {
+		return appDate;
+	}
+
+
+	public int getAppTime() {
+		return appTime;
+	}
+
+
+	public String getComment() {
+		return comment;
+	}
+
+	public static ArrayList<Appointment> getAppointmentsFromJson(String output) throws ParseException{
+		JSONParser parser = new JSONParser();
+		Object obj = parser.parse(output);
+		ArrayList<Appointment> list = new ArrayList<Appointment>();
+		Appointment app = new Appointment();
+		JSONArray array = (JSONArray) obj;
+        Iterator<JSONObject> iterator = array.iterator();
+        while (iterator.hasNext()) {
+        	app = createAppointmentFromJson(iterator.next());
+        	list.add(app);
+        }
+		
+		
+		return list;
+	}
+	
+	private static Appointment createAppointmentFromJson(JSONObject next) {
+		
+		Appointment app = new Appointment();
+	
+		JSONObject jsonObject = (JSONObject) next;
+		app.doctorId = ((Long) jsonObject.get("doctorId")).intValue();
+        app.patientId = ((Long) jsonObject.get("patientId")).intValue();
+        app.appTime = ((Long) jsonObject.get("appTime")).intValue();
+        app.comment = (String) jsonObject.get("comment");
+		       
+		return app;
+	}
+
+
+	public Appointment(int patientId, int doctorId, String appDate, int appTime, String comment) {
+		super();
+		this.patientId = patientId;
+		this.doctorId = doctorId;
+		this.appDate = appDate;
+		this.appTime = appTime;
+		this.comment = comment;
+	}
+
+
+	public Appointment() {
+		
+	}
+	
+	
+}
