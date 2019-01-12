@@ -158,4 +158,8 @@ public boolean modifyComment(Appointment appointment) {
 	
 	return false;
 }
+public List<Patient> getPatients(int doctorId) {
+	// TODO Auto-generated method stub
+	return null;
+}
 }

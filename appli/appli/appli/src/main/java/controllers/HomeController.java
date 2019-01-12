@@ -71,7 +71,17 @@ public class HomeController implements Initializable {
 			stage.setTitle("Connexion");
 			stage.setScene(scene);
 	   }
-	
+	public void patientListAction(ActionEvent event) throws IOException{
+		 int doctorId = (Integer) btn_patientList.getScene().getWindow().getUserData();
+
+		AnchorPane root =  FXMLLoader.load(getClass()
+                .getResource("/views/PatientList.fxml"));
+			Scene scene = new Scene(root);
+			Stage stage = (Stage) btn_patientList.getScene().getWindow();
+			stage.setTitle("Liste des patients");
+			stage.setUserData(doctorId);
+			stage.setScene(scene);
+	}
 	public void displayAppForTheDay(ActionEvent event) throws ParseException {
 		 Api app = new Api();
 		 Date today = new Date();
@@ -82,13 +92,8 @@ public class HomeController implements Initializable {
 		 List<Appointment> appList = app.getAppointmentsForTheDay(myDate, doctorId);
 		 
 		 Iterator<Appointment> iterator = appList.iterator(); 
-	        while(iterator.hasNext()){
-	        	Appointment appointment = iterator.next();
-	        	
-	        }
-	        lstView_app.getItems().setAll(appList);
-	        
-	        btn_appList.setVisible(false);
+	     lstView_app.getItems().setAll(appList);
+	     btn_appList.setVisible(false);
 	        
 	}
 	 
