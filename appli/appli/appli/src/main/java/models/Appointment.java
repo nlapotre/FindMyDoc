@@ -48,7 +48,8 @@ public class Appointment {
 		ArrayList<Appointment> list = new ArrayList<Appointment>();
 		Appointment app = new Appointment();
 		JSONArray array = (JSONArray) obj;
-        Iterator<JSONObject> iterator = array.iterator();
+        @SuppressWarnings("unchecked")
+		Iterator<JSONObject> iterator = array.iterator();
         while (iterator.hasNext()) {
         	app = createAppointmentFromJson(iterator.next());
         	list.add(app);

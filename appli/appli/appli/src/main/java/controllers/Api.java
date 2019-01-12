@@ -1,22 +1,16 @@
 package controllers;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
-import java.util.ListIterator;
 
-import javax.ws.rs.core.MediaType;
 
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
-import com.sun.jersey.api.client.WebResource.Builder;
-import com.sun.jersey.api.client.config.ClientConfig;
-import com.sun.jersey.api.client.config.DefaultClientConfig;
+
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.ClientResponse;
-import com.sun.jersey.api.client.GenericType;
 import com.sun.jersey.api.client.WebResource;
 
 import models.Appointment;
@@ -34,7 +28,6 @@ public class Api {
 	public int login(String login, String password) throws ParseException{
 		WebResource webResource = this.client.resource(this.url + "/doctor/login");
  
-		//Parameters
         String input = "{\"login\":\""+login+"\",\"password\":\""+password+"\"}";
         
         ClientResponse response = webResource.type("application/json").post(ClientResponse.class, input);
@@ -47,16 +40,16 @@ public class Api {
             return 0;
         }
  
-        System.out.println("Output from Server .... \n");
+       // System.out.println("Output from Server .... \n");
         
         String output = response.getEntity(String.class);
         
-        System.out.println(output);
+        //System.out.println(output);
         JSONParser parser = new JSONParser();
 		Object obj = parser.parse(output);
 		JSONObject jsObj = (JSONObject) obj;
 		int id = ((Long) jsObj.get("ID")).intValue();
-        String token = (String) jsObj.get("token");
+        //String token = (String) jsObj.get("token");
         return id;
 		
 	}
@@ -77,28 +70,17 @@ public class Api {
             return false;
         }
  
-        System.out.println("Output from Server .... \n");
-        
-        String output = response.getEntity(String.class);
-        
-        System.out.println(output);
+        //System.out.println("Output from Server .... \n");
+        //String output = response.getEntity(String.class);
+        //System.out.println(output);
         return true;
 		
 	}
 	
 	public List<Appointment> getAppointmentsForTheDay(String date, int doctorId) throws ParseException{
 		
-		ClientConfig clientConfig = new DefaultClientConfig();
-		 
-	      // Create Client based on Config
-	      Client client = Client.create(clientConfig);
-		WebResource webResource = this.client.resource(this.url + "/appointment/getDoctorAppForTheDay?doctorId="+doctorId+"&appDate="+date+"");
-		 
 		
-        
-        /*Builder builder = webResource.accept(MediaType.APPLICATION_JSON) 
-                .header("content-type", MediaType.APPLICATION_JSON);
-   */
+		WebResource webResource = this.client.resource(this.url + "/appointment/getDoctorAppForTheDay?doctorId="+doctorId+"&appDate="+date+"");
         ClientResponse response = webResource.type("application/json").get(ClientResponse.class);
         
         if (response.getStatus() != 201) {
@@ -109,16 +91,9 @@ public class Api {
         }
         String output = response.getEntity(String.class);
         
-        System.out.println("Output from Server .... \n");
-        System.out.println(output);
+        //System.out.println("Output from Server .... \n");
+        //System.out.println(output);
         ArrayList<Appointment> list = models.Appointment.getAppointmentsFromJson(output);
-        
-        Iterator<Appointment> iterator = list.iterator(); 
-        while(iterator.hasNext()){
-        	Appointment app = iterator.next();
-        	System.out.println(app.getPatientId());
-        }
-   
        
 		return list;
 		
@@ -126,16 +101,9 @@ public class Api {
 	
 public Patient getPatientInfos(int patientId) throws ParseException{
 		
-		ClientConfig clientConfig = new DefaultClientConfig();
-		Client client = Client.create(clientConfig);
-		WebResource webResource = this.client.resource(this.url + "/patient/infosFromId?id="+patientId);
-		 
 		
-        
-        /*Builder builder = webResource.accept(MediaType.APPLICATION_JSON) 
-                .header("content-type", MediaType.APPLICATION_JSON);
-   */
-        ClientResponse response = webResource.type("application/json").get(ClientResponse.class);
+		WebResource webResource = this.client.resource(this.url + "/patient/infosFromId?id="+patientId);
+		ClientResponse response = webResource.type("application/json").get(ClientResponse.class);
         
         if (response.getStatus() != 201) {
             System.out.println("Failed with HTTP Error code: " + response.getStatus());
@@ -147,8 +115,9 @@ public Patient getPatientInfos(int patientId) throws ParseException{
         JSONParser parser = new JSONParser();
         Object obj = parser.parse(output);
         JSONObject jsonObject = (JSONObject) obj;
-        System.out.println("Output from Server .... \n");
-        System.out.println(jsonObject);
+        
+        //System.out.println("Output from Server .... \n");
+        //System.out.println(jsonObject);
        
        
 		return Patient.createPatientFromJSon(jsonObject);
@@ -159,7 +128,7 @@ public boolean modifyComment(Appointment appointment) {
 	return false;
 }
 public List<Patient> getPatients(int doctorId) {
-	// TODO Auto-generated method stub
+	
 	return null;
 }
 }

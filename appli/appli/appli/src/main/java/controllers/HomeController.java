@@ -5,14 +5,11 @@ import java.net.URL;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.Iterator;
 import java.util.List;
 import java.util.ResourceBundle;
 
 import org.json.simple.parser.ParseException;
 
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -91,7 +88,6 @@ public class HomeController implements Initializable {
 		 System.out.println("Args = " + myDate + " | " + doctorId );
 		 List<Appointment> appList = app.getAppointmentsForTheDay(myDate, doctorId);
 		 
-		 Iterator<Appointment> iterator = appList.iterator(); 
 	     lstView_app.getItems().setAll(appList);
 	     btn_appList.setVisible(false);
 	        
@@ -114,13 +110,11 @@ public class HomeController implements Initializable {
 		}
 	}
 	
-	/*public void saveAction(ActionEvent event){
-		   Appointment app = lstView_app.getSelectionModel().getSelectedItem();
-		   if(app.saveComment(txt_comment.getText())){
-			   lbl_saved.setVisible(true);
-		   }
-		 
-	   }*/
+	public void saveAction(ActionEvent event){
+			lbl_saved.setVisible(true);
+		  	 
+	   }
+	
 	public void initialize(URL location, ResourceBundle resources) {
 		
 	}

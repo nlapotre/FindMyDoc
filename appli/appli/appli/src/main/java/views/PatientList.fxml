@@ -7,21 +7,14 @@
 <?import javafx.scene.text.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
-<AnchorPane xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="controllers.PatientListController">
+<AnchorPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.PatientListController">
    <children>
       <AnchorPane layoutX="10.0" layoutY="10.0" prefHeight="600.0" prefWidth="1000.0">
          <children>
             <AnchorPane layoutY="125.0" prefHeight="400.0" prefWidth="1000.0" style="-fx-background-color: cornflowerblue;">
                <children>
-                  <ListView fx:id="lstView_patients" layoutX="14.0" layoutY="52.0" onMouseClicked="#displayPatientApps" prefHeight="323.0" prefWidth="407.0" />
-                  <Button fx:id="btn_patientList" layoutX="28.0" layoutY="72.0" mnemonicParsing="false" onAction="#displayPatientList" prefHeight="31.0" prefWidth="239.0" text="Afficher mes Patients" />
-                  <ListView fx:id="lstView_app" layoutX="444.0" layoutY="52.0" prefHeight="323.0" prefWidth="542.0" visible="false" />
-                  <Label fx:id="lbl_patientAppList" layoutX="465.0" layoutY="14.0" text="Rendez-vous de ce patient : " visible="false">
-                     <font>
-                        <Font name="System Bold" size="15.0" />
-                     </font>
-                  </Label>
+                  <ListView fx:id="lstView_patients" layoutX="14.0" layoutY="24.0"  prefHeight="351.0" prefWidth="965.0" />
+                  <Button fx:id="btn_patientList" layoutX="377.0" layoutY="169.0" mnemonicParsing="false" onAction="#displayPatientList" prefHeight="31.0" prefWidth="239.0" text="Afficher mes Patients" />
                </children>
             </AnchorPane>
             <Button fx:id="btn_disconnect" layoutX="33.0" layoutY="546.0" mnemonicParsing="false" onAction="#disconnectAction" text="Se déconnecter" />
