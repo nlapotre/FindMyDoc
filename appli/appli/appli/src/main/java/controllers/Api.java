@@ -20,6 +20,7 @@ import com.sun.jersey.api.client.GenericType;
 import com.sun.jersey.api.client.WebResource;
 
 import models.Appointment;
+import models.Patient;
 
 public class Api {
 	
@@ -28,7 +29,7 @@ public class Api {
 	
 	public static void main(String[] args) throws ParseException{
 		Api api = new Api();
-		List<Appointment> list = api.getAppointmentsForTheDay("14/11/2019", 1);
+		api.getPatientInfos(1);
 	}
 	public int login(String login, String password) throws ParseException{
 		WebResource webResource = this.client.resource(this.url + "/doctor/login");
@@ -122,4 +123,39 @@ public class Api {
 		return list;
 		
 	}
+	
+public Patient getPatientInfos(int patientId) throws ParseException{
+		
+		ClientConfig clientConfig = new DefaultClientConfig();
+		Client client = Client.create(clientConfig);
+		WebResource webResource = this.client.resource(this.url + "/patient/infosFromId?id="+patientId);
+		 
+		
+        
+        /*Builder builder = webResource.accept(MediaType.APPLICATION_JSON) 
+                .header("content-type", MediaType.APPLICATION_JSON);
+   */
+        ClientResponse response = webResource.type("application/json").get(ClientResponse.class);
+        
+        if (response.getStatus() != 201) {
+            System.out.println("Failed with HTTP Error code: " + response.getStatus());
+           String error= response.getEntity(String.class);
+           System.out.println("Error: "+error);
+            return null;
+        }
+        String output = response.getEntity(String.class);
+        JSONParser parser = new JSONParser();
+        Object obj = parser.parse(output);
+        JSONObject jsonObject = (JSONObject) obj;
+        System.out.println("Output from Server .... \n");
+        System.out.println(jsonObject);
+       
+       
+		return Patient.createPatientFromJSon(jsonObject);
+		
+	}
+public boolean modifyComment(Appointment appointment) {
+	
+	return false;
+}
 }

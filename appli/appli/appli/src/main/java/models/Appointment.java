@@ -8,6 +8,8 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
+import controllers.Api;
+
 public class Appointment {
 	private int patientId;
 	private int doctorId;
@@ -79,9 +81,31 @@ public class Appointment {
 		this.comment = comment;
 	}
 
-
+	 @Override
+	    public String toString() {
+		Api api = new Api(); 
+		String res = "";
+		 try {
+			Patient patient = api.getPatientInfos(this.patientId);
+			res = "Patient : "+ patient.getLastName()+ " " + patient.getFirstName() + "\n Heure du rdv : " + String.valueOf(this.appTime) + "h"; 
+			
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		 return res;
+		 	
+	    }
 	public Appointment() {
 		
+	}
+
+
+	public boolean saveComment(String text) {
+		Api api = new Api(); 
+		if(api.modifyComment(this)){
+			return true;
+		}
+		return false; 
 	}
 	
 	

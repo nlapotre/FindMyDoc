@@ -105,13 +105,13 @@ module.exports = {
   },
 
   getPatientInfosFromId: (req, res) =>{
-    var patientId = req.body.id;
+    var patientId = req.query.id;
 
     if(patientId < 0){
       res.status(400).json({'error' : 'wrong token'});
     }
     models.Patient.findOne({
-      attributes: ['id', 'mail', 'firstName'],
+      attributes: ['id', 'lastName', 'firstName', 'mail', 'tel', 'postalCode'],
       where: {id: patientId }
     }).then((patient)=> {
       if (patient){
@@ -124,4 +124,6 @@ module.exports = {
       res.status(500).json({'error': 'cannot fetch user'});
     });
   }
+
+  
 }

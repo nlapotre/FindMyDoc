@@ -98,6 +98,46 @@ module.exports = {
     }).catch((err)=> {
       res.status(404).json({'error': 'could not find appointments'});
     });
-  }
+  },
 
+
+  updateComment: (req, res) => {
+    var doctorId = req.body.doctorId;
+    var patientId = req.body.patientId;
+    var appDate = req.body.appDate;
+    var appTime = req.body.appTime;
+    var comment = req.body.comment;
+
+    models.Appointment.findOne({
+      attributes: ['doctorId', 'patientId', 'appDate', 'appTime', 'comment'],
+      where: {doctorId: doctorId, patientId: patientId, appDate: appDate, appTime: appTime}
+    })
+    .then((foundOne) => {
+      if(foundOne){
+        foundOne.comment = req.body.comment;
+         foundOne.update({
+           comment: comment
+         })
+        .then((foundOne)=> {
+          return res.status(201).json({
+            'DoctorId': foundOne.doctorId,
+            'PatientId': foundOne.patientId,
+            'appDate': foundOne.appDate,
+            'appTime': foundOne.appTime,
+            'comment': foundOne.comment
+          })
+          .catch((err) => {
+            res.status(500).json({'error' : 'unable to create user  '});
+        })
+      })
+    }
+    else{
+      res.status(409).json({'error' : 'user already exists'});
+    }
+  })
+  .catch((err)=> {
+    res.status(500).json({'error' : 'unable to verify user   '});
+  })
+
+}
 }
