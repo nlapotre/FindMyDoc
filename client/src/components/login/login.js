@@ -1,5 +1,6 @@
 import React from 'react';
 import { Button, FormGroup, FormControl, ControlLabel} from "react-bootstrap";
+import {NotificationContainer, NotificationManager} from 'react-notifications'
 import '../../styles/button.css';
 import API from '../../utils/API';
 
@@ -14,21 +15,20 @@ export class Login extends React.Component {
         this.send.bind(this);
     }
     send = event => {
-        if(this.state.login.length === 0){
+        if(this.state.login.length === 0 || this.state.password.length === 0){
             return;
         }
-        if(this.state.password.length === 0){
-            return;
-        }
+
         API.login(this.state.login, this.state.password).then(function(data){
           if(data.status === 200){
             localStorage.setItem('token', data.data.token);
-            localStorage.setItem('patientId', data.data.ID)
+            localStorage.setItem('patientId', data.data.ID);
             window.location = "/home"
           }
 
         },function(error){
             console.log(error);
+            NotificationManager.info('Info message');
 
             return;
         })

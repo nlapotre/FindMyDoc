@@ -13,6 +13,8 @@ import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.WebResource;
 
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import models.Appointment;
 import models.Patient;
 
@@ -34,9 +36,13 @@ public class Api {
 
         if (response.getStatus() != 200) {
             System.out.println("Failed : HTTP error code : " + response.getStatus());
+            Alert alert = new Alert(AlertType.ERROR);
+            //String error= response.getEntity(String.class);
+       	 	alert.setTitle("Erreur de connexion");
+	        alert.setHeaderText("Connexion impossible");
+	        alert.setContentText("Login ou mot de passe incorrect");
+	        alert.showAndWait();
             
-            String error= response.getEntity(String.class);
-            System.out.println("Error: "+error);
             return 0;
         }
  
@@ -65,8 +71,12 @@ public class Api {
         if (response.getStatus() != 201) {
             System.out.println("Failed : HTTP error code : " + response.getStatus());
             
-            String error= response.getEntity(String.class);
-            System.out.println("Error: "+error);
+            Alert alert = new Alert(AlertType.ERROR);
+            //String error= response.getEntity(String.class);
+       	 	alert.setTitle("Erreur");
+	        alert.setHeaderText("Inscription impossible");
+	        alert.setContentText("L'utilisateur existe déjà");
+	        alert.showAndWait();
             return false;
         }
  
