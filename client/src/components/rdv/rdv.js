@@ -36,7 +36,7 @@ export class Rdv extends React.Component {
 
     render() {
         return(
-            <div className="Rdv" >
+            <div className="Login" >
                 <h1>Choisissez un médecin</h1>
 
 

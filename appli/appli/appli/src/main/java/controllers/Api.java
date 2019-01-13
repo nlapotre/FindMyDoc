@@ -1,9 +1,10 @@
 package controllers;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
-
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
@@ -25,7 +26,7 @@ public class Api {
 	
 	public static void main(String[] args) throws ParseException{
 		Api api = new Api();
-		api.getPatientInfos(1);
+		api.getPatients(1);
 	}
 	public int login(String login, String password) throws ParseException{
 		WebResource webResource = this.client.resource(this.url + "/doctor/login");
@@ -109,6 +110,7 @@ public class Api {
 		
 	}
 	
+	
 public Patient getPatientInfos(int patientId) throws ParseException{
 		
 		
@@ -137,8 +139,53 @@ public boolean modifyComment(Appointment appointment) {
 	
 	return false;
 }
-public List<Patient> getPatients(int doctorId) {
+public List<Patient> getPatients(int doctorId) throws ParseException {
+	WebResource webResource = this.client.resource(this.url + "/doctorPatient/getPatients?id="+doctorId);
+    ClientResponse response = webResource.type("application/json").get(ClientResponse.class);
+    
+    if (response.getStatus() != 201) {
+        System.out.println("Failed with HTTP Error code: " + response.getStatus());
+       String error= response.getEntity(String.class);
+       System.out.println("Error: "+error);
+        return null;
+    }
+    String output = response.getEntity(String.class);
+    
+    JSONParser parser = new JSONParser();
+	Object obj = parser.parse(output);
+	ArrayList<Patient> list = new ArrayList<Patient>();
+	JSONArray array = (JSONArray) obj;
+    @SuppressWarnings("unchecked")
+	Iterator<JSONObject> iterator = array.iterator();
+    while (iterator.hasNext()) {
+    	JSONObject res = iterator.next();
+    	Patient patient = getPatientInfos(((Long) res.get("patientId")).intValue());
+    	list.add(patient);
+    }
 	
-	return null;
+    //System.out.println("Output from Server .... \n");
+    //System.out.println(output);
+    
+   
+	return list;
+}
+public List<Appointment> getPatientApp(int doctorId, int patientId) throws ParseException {
+	
+	WebResource webResource = this.client.resource(this.url + "/appointment/getPatientFromDoctorApp?doctorId="+doctorId+"&patientId="+patientId);
+    ClientResponse response = webResource.type("application/json").get(ClientResponse.class);
+    
+    if (response.getStatus() != 201) {
+        System.out.println("Failed with HTTP Error code: " + response.getStatus());
+       String error= response.getEntity(String.class);
+       System.out.println("Error: "+error);
+        return null;
+    }
+    String output = response.getEntity(String.class);
+    
+    //System.out.println("Output from Server .... \n");
+    //System.out.println(output);
+    ArrayList<Appointment> list = models.Appointment.getAppointmentsFromJson(output);
+   
+	return list;
 }
 }

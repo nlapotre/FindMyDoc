@@ -1,6 +1,9 @@
 package models;
 
 import org.json.simple.JSONObject;
+import org.json.simple.parser.ParseException;
+
+import controllers.Api;
 
 public class Patient {
 	
@@ -59,4 +62,15 @@ public class Patient {
 	public String getPostalCode() {
 		return postalCode;
 	}
+	
+	 @Override
+	    public String toString() {
+		
+			String res;
+			res = "Patient : "+ this.getLastName()+ " " + this.getFirstName() ; 
+				
+			return res;
+		 	
+	    }
+	
 }

@@ -51,7 +51,7 @@ module.exports = {
     var appDate = req.query.appDate;
 
     models.Appointment.findAll({
-      attributes: ['doctorId', 'patientId', 'appTime', 'comment'],
+      attributes: ['doctorId', 'patientId', 'appTime', 'appDate', 'comment'],
       where: {doctorId: doctorId, appDate: appDate}
     }).then((appointments) => {
       res.status(201).json(appointments);

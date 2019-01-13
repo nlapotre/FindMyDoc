@@ -33,6 +33,11 @@ send = event => {
       appTime:this.state.appTime,
       comment:this.state.comment
   }
+  var _sendToo = {
+    doctorId: this.state.doctorId,
+    patientId:localStorage.getItem('patientId')
+  }
+    API.createRelation(_sendToo);
     API.createAppointment(_send).then(function(data){
       if(data.status === 201){
         window.location = "/home"
@@ -50,7 +55,7 @@ handleChange = event => {
 
     render() {
         return(
-            <div className="RdvDoctor" >
+            <div className="Login" >
               <h1>{this.state.doctor.lastName} {this.state.doctor.firstName}</h1>
               <h2>{this.state.doctor.specialty}</h2>
 

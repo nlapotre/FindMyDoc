@@ -67,6 +67,7 @@ public class Appointment {
 		app.doctorId = ((Long) jsonObject.get("doctorId")).intValue();
         app.patientId = ((Long) jsonObject.get("patientId")).intValue();
         app.appTime = ((Long) jsonObject.get("appTime")).intValue();
+        app.appDate = (String) jsonObject.get("appDate");
         app.comment = (String) jsonObject.get("comment");
 		       
 		return app;
@@ -88,7 +89,7 @@ public class Appointment {
 		String res = "";
 		 try {
 			Patient patient = api.getPatientInfos(this.patientId);
-			res = "Patient : "+ patient.getLastName()+ " " + patient.getFirstName() + "\n Heure du rdv : " + String.valueOf(this.appTime) + "h"; 
+			res = "Patient : "+ patient.getLastName()+ " " + patient.getFirstName() + "\n Heure du rdv : " + String.valueOf(this.appTime) + "h le " + this.appDate + " \n Commentaire : " + this.comment; 
 			
 		} catch (ParseException e) {
 			e.printStackTrace();
@@ -99,6 +100,8 @@ public class Appointment {
 	public Appointment() {
 		
 	}
+	
+	
 
 
 	public boolean saveComment(String text) {

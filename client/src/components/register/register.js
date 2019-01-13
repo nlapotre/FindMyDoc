@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, FormGroup, FormControl, ControlLabel } from "react-bootstrap";
+import { Button, FormGroup, FormControl, ControlLabel, Alert } from "react-bootstrap";
 import '../../styles/button.css';
 import API from '../../utils/API';
 
@@ -14,33 +14,37 @@ export class Signup extends React.Component {
             mail : "",
             tel: "",
             password: "",
-            cpassword: ""
+            cpassword: "",
+            error: ""
         }
         this.handleChange.bind(this);
         this.send.bind(this);
     }
     send = event => {
-        if(this.state.mail.length === 0){
+
+        if(!this.state.mail.length === 0 || this.state.password.length === 0 || this.state.password !== this.state.cpassword ){
+            console.log("Erreur de saisies");
             return;
+        }else{
+          var _send = {
+              firstName: this.state.firstName,
+              lastName: this.state.lastName,
+              login: this.state.login,
+              password: this.state.password,
+              postalCode: this.state.postalCode,
+              mail: this.state.mail,
+              tel: this.state.tel
+          }
+
+
+          API.register(_send).then(function(data){
+              window.location = "/"
+          },function(error){
+              console.log(error);
+              return;
+          })
         }
-        if(this.state.password.length === 0 || this.state.password !== this.state.cpassword){
-            return;
-        }
-        var _send = {
-            firstName: this.state.firstName,
-            lastName: this.state.lastName,
-            login: this.state.login,
-            password: this.state.password,
-            postalCode: this.state.postalCode,
-            mail: this.state.mail,
-            tel: this.state.tel
-        }
-        API.register(_send).then(function(data){
-            window.location = "/"
-        },function(error){
-            console.log(error);
-            return;
-        })
+
     }
     handleChange = event => {
         this.setState({

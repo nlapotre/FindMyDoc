@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, FormGroup, FormControl, ControlLabel} from "react-bootstrap";
+import { Button, FormGroup, FormControl, ControlLabel, Alert} from "react-bootstrap";
 import {NotificationContainer, NotificationManager} from 'react-notifications'
 import '../../styles/button.css';
 import API from '../../utils/API';
@@ -25,14 +25,13 @@ export class Login extends React.Component {
             localStorage.setItem('patientId', data.data.ID);
             window.location = "/home"
           }
-
         },function(error){
             console.log(error);
-            NotificationManager.info('Info message');
 
             return;
         })
     }
+
     handleChange = event => {
         this.setState({
             [event.target.id]: event.target.value
@@ -41,9 +40,9 @@ export class Login extends React.Component {
     render() {
         return(
           <div className="Login">
-                <FormGroup controlId="login" bsSize="large">
+                <FormGroup controlId="login" bsSize="large" >
                 <ControlLabel> Login </ControlLabel>
-                <FormControl autoFocus type="login" value={this.state.login} onChange={this.handleChange}/>
+                <FormControl autoFocus type="login" value={this.state.login} onChange={this.handleChange} />
                 </FormGroup>
                 <FormGroup controlId="password" bsSize="large">
                 <ControlLabel>Password</ControlLabel>
@@ -58,8 +57,10 @@ export class Login extends React.Component {
                 >
                 Connexion
                 </Button>
-
+                <a href="/register">Pas encore inscrit ? Cliquez ici</a>
             </div>
+
+
         )
     }
 }

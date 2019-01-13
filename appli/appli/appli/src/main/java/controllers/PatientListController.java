@@ -15,6 +15,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import models.Appointment;
@@ -33,12 +34,20 @@ public class PatientListController implements Initializable {
 	@FXML
 	private Button btn_disconnect;
 	@FXML
+	private Button btn_home;
+	@FXML
 	private Button btn_patientList;
 	
 	@FXML
-	private AnchorPane pane_appInfos;
+	private AnchorPane pane_patientInfos;
 	@FXML
 	private Label lbl_patientAppList;
+	@FXML
+	private Label lbl_name;
+	@FXML
+	private Label lbl_mail;
+	@FXML
+	private Label lbl_tel;
 
 	
 	
@@ -53,9 +62,18 @@ public class PatientListController implements Initializable {
 			stage.setScene(scene);
 	   }
 	
+	public void homeAction(ActionEvent event) throws IOException{
+			System.out.println("passe");
+		   AnchorPane root =  FXMLLoader.load(getClass()
+                .getResource("/views/Home.fxml"));
+			Scene scene = new Scene(root);
+			Stage stage = (Stage) btn_home.getScene().getWindow();
+			stage.setTitle("Accueil");
+			stage.setScene(scene);
+	   }
 	public void displayPatientList(ActionEvent event) throws ParseException {
 		 Api app = new Api();
-		 int doctorId = (Integer) lstView_app.getScene().getWindow().getUserData();
+		 int doctorId = (Integer) lstView_patients.getScene().getWindow().getUserData();
 		 List<Patient> patientList = app.getPatients(doctorId);
 		 
      
@@ -65,7 +83,19 @@ public class PatientListController implements Initializable {
 	        
 	}
 	 
-	
+	public void displayAppList(MouseEvent event) throws ParseException{
+		Patient patient = lstView_patients.getSelectionModel().getSelectedItem();
+		if(patient != null){
+			int doctorId = (Integer) lstView_patients.getScene().getWindow().getUserData();
+			Api api = new Api(); 
+			 List<Appointment> patientAppList = api.getPatientApp(doctorId, patient.getId());
+			
+			 lstView_app.getItems().setAll(patientAppList);
+			
+
+			lstView_app.setVisible(true);
+		}
+	}
 	
 	
 	public void initialize(URL location, ResourceBundle resources) {
