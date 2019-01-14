@@ -7,6 +7,7 @@ exports.router = ( () =>{
   doctorRouter.route('/register/').post(doctorCtrl.register);
   doctorRouter.route('/login/').post(doctorCtrl.login);
   doctorRouter.route('/infos/').get(doctorCtrl.getDoctorInfos);
+  doctorRouter.route('/all/').get(doctorCtrl.getDoctors);
 
   return doctorRouter;
 

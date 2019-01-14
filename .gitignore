@@ -1,2 +1,10 @@
 
 node_modules/
+
+appli/appli/\.metadata
+
+appli/appli/\.recommenders/index/http___download_eclipse_org_recommenders_models_neon_/
+
+appli/appli/FrontAppli/\.settings/
+
+appli/appli/appli/\.settings/

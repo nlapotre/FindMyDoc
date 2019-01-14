@@ -7,6 +7,7 @@ module.exports = {
       var patientId = req.body.patientId;
       var appDate = req.body.appDate;
       var appTime = req.body.appTime;
+      var comment = req.body.comment;
 
       models.Appointment.findOne({
         attributes: ['doctorId', 'patientId', 'appDate', 'appTime'],
@@ -18,14 +19,16 @@ module.exports = {
             doctorId: doctorId,
             patientId: patientId,
             appDate: appDate,
-            appTime: appTime
+            appTime: appTime,
+            comment: comment
           })
           .then((newOne)=> {
             return res.status(201).json({
               'DoctorId': newOne.doctorId,
               'PatientId': newOne.patientId,
               'appDate': newOne.appDate,
-              'appTime': newOne.appTime
+              'appTime': newOne.appTime,
+              'comment': newOne.comment
             })
             .catch((err) => {
               res.status(500).json({'error' : 'unable to create user  '});
@@ -48,7 +51,7 @@ module.exports = {
     var appDate = req.query.appDate;
 
     models.Appointment.findAll({
-      attributes: ['doctorId', 'patientId', 'appTime', 'comment'],
+      attributes: ['doctorId', 'patientId', 'appTime', 'appDate', 'comment'],
       where: {doctorId: doctorId, appDate: appDate}
     }).then((appointments) => {
       res.status(201).json(appointments);
@@ -95,6 +98,19 @@ module.exports = {
     }).catch((err)=> {
       res.status(404).json({'error': 'could not find appointments'});
     });
-  }
+  },
 
+
+  updateComment: (req, res) => {
+    return models.Appointment.update({
+      comment: req.body.comment
+    }, {
+      where: {doctorId: req.body.doctorId, patientId: req.body.patientId, appDate: req.body.appDate, appTime: req.body.appTime}
+    }).then(app => {
+      res.status(201).json(app);
+    }).catch((err)=> {
+      res.status(500).json({'err': 'could not find one'});
+    });
+
+  }
 }

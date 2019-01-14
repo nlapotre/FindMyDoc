@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.HomeController">
+   <children>
+      <AnchorPane layoutY="125.0" prefHeight="400.0" prefWidth="1000.0" style="-fx-background-color: cornflowerblue;">
+         <children>
+            <ListView fx:id="lstView_app" layoutX="14.0" layoutY="52.0" onMouseClicked="#displayAppInfos" prefHeight="323.0" prefWidth="407.0" />
+            <Label layoutX="28.0" layoutY="14.0" text="Rendez-vous de la journée : ">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+            <AnchorPane fx:id="pane_appInfos" layoutX="438.0" layoutY="52.0" prefHeight="323.0" prefWidth="552.0" style="-fx-background-color: WHITE;" visible="false">
+               <children>
+                  <Label fx:id="lbl_time" layoutX="28.0" layoutY="14.0" text="Rendez-vous de 10h">
+                     <font>
+                        <Font name="System Bold" size="15.0" />
+                     </font></Label>
+                  <Label fx:id="lbl_lastName" layoutX="17.0" layoutY="84.0" text="Nom" />
+                  <Label fx:id="lbl_firstName" layoutX="17.0" layoutY="116.0" text="Prénom" />
+                  <Label fx:id="lbl_mail" layoutX="17.0" layoutY="153.0" text="Mail : " />
+                  <Label fx:id="lbl_tel" layoutX="14.0" layoutY="186.0" text="Téléphone : " />
+                  <Label fx:id="lbl_comment" layoutX="340.0" layoutY="14.0" text="Commentaire : " />
+                  <TextArea fx:id="txt_comment" layoutX="253.0" layoutY="40.0" prefHeight="270.0" prefWidth="276.0" />
+                  <Button fx:id="btn_comment" onAction="#saveAction" layoutX="17.0" layoutY="235.0" mnemonicParsing="false" text="Enregistrer commentaire" />
+                  <Label fx:id="lbl_saved" layoutX="74.0" layoutY="276.0" text="Enregistré" visible="false">
+                     <font>
+                        <Font name="System Italic" size="12.0" />
+                     </font>
+                  </Label>
+               </children></AnchorPane>
+            <Button fx:id="btn_appList" layoutX="28.0" layoutY="72.0" mnemonicParsing="false" onAction="#displayAppForTheDay" prefHeight="31.0" prefWidth="239.0" text="Afficher mes rendez-vous" />
+         </children>
+      </AnchorPane>
+      <Button fx:id="btn_disconnect" layoutX="33.0" layoutY="546.0" mnemonicParsing="false" onAction="#disconnectAction" text="Se déconnecter" />
+      <Label layoutX="435.0" layoutY="29.0" text="Bienvenue ">
+         <font>
+            <Font name="System Bold" size="22.0" />
+         </font>
+      </Label>
+      <Button fx:id="btn_patientList" layoutX="851.0" layoutY="76.0" mnemonicParsing="false" onAction="#patientListAction" text="Liste des patients" />
+      <ImageView fitHeight="122.0" fitWidth="123.0" layoutX="11.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@./logo.png" />
+         </image>
+      </ImageView>
+   </children>
+</AnchorPane>
