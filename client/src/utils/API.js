@@ -21,12 +21,13 @@ export default {
        {headers: headers})
     },
     getAppointments : function(patientId){
-      return fetch(burl + '/api/appointment/getPatientApp?patientId' + patientId, {},
-       {headers: headers})
+      return fetch(burl + '/api/appointment/getPatientApp?patientId=' + patientId, {},
+       {headers: headers});
     },
     getDoctorInfos : function(id){
        return fetch(burl + '/api/doctor/infos?id=' + id,
-        {headers: headers})
+        {headers: headers});
+
     },
     createAppointment : function(send){
         return axios.post(burl + '/api/appointment/create',send,{headers: headers})

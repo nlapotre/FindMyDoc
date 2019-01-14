@@ -10,21 +10,38 @@ export class ListRdv extends React.Component {
   constructor(props){
     super(props);
     this.state = {
-      'appointements': []
+      'appointments': [],
+      'doctors': []
     }
-    this.getAppointments();
+    var patientId =localStorage.getItem("patientId");
+    this.getAppointments(patientId);
+    this.getDoctors()
   }
 
 
-  getAppointments(){
-      API.getAppointments(localStorage.getItem("patientId"))
+  getAppointments(patientId){
+      API.getAppointments(patientId)
       .then(res => res.json())
-      .then(res => this.setState({'appointements': res}));
+      .then(res => this.setState({'appointments': res}));
   }
   renderAppointments(){
-    return this.state.appointements.map((appointment, index) => {
-      return( <ListGroupItem key={index}>{appointment.appDate}</ListGroupItem>);
+    return this.state.appointments.map((appointment, index) => {
+      return( <ListGroupItem key={index}><p>Rendez-vous le : <strong>{appointment.appDate}</strong> à <strong>{appointment.appTime}h</strong> avec le docteur <strong>{this.getDoctorName(appointment.doctorId)}</strong></p> </ListGroupItem>);
     });
+  }
+  getDoctors(){
+    API.getDoctors()
+    .then(res => res.json())
+    .then(res => this.setState({'doctors': res}));
+  }
+  getDoctorName(doctorId){
+    var doctorName;
+    this.state.doctors.forEach((doctor, index) => {
+      if(doctor.id === doctorId){
+        doctorName = doctor.lastName;
+      }
+    });
+    return doctorName;
   }
 
 

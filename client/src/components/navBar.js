@@ -9,7 +9,7 @@ class Header extends Component {
 
   render()  {
     return(
-      <Navbar className="navbar">
+      <Navbar className="navbarUp">
         <a href='/'><Image src={logo} /></a>
       </Navbar>
     )

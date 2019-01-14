@@ -15,6 +15,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.control.TextArea;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
@@ -31,6 +32,10 @@ public class PatientListController implements Initializable {
 	@FXML
 	private ListView<Appointment> lstView_app;
 	
+	@FXML 
+	private AnchorPane pane_comment;
+	@FXML
+	private TextArea txt_comment;
 	@FXML
 	private Button btn_disconnect;
 	@FXML
@@ -63,7 +68,6 @@ public class PatientListController implements Initializable {
 	   }
 	
 	public void homeAction(ActionEvent event) throws IOException{
-			System.out.println("passe");
 		   AnchorPane root =  FXMLLoader.load(getClass()
                 .getResource("/views/Home.fxml"));
 			Scene scene = new Scene(root);
@@ -96,7 +100,14 @@ public class PatientListController implements Initializable {
 			lstView_app.setVisible(true);
 		}
 	}
-	
+	public void displayComment(MouseEvent event) throws ParseException{
+		Appointment app = lstView_app.getSelectionModel().getSelectedItem();
+		if(app != null){
+			txt_comment.setText(app.getComment());			
+			lstView_app.setPrefWidth(350.0);
+			pane_comment.setVisible(true);
+		}
+	}
 	
 	public void initialize(URL location, ResourceBundle resources) {
 		

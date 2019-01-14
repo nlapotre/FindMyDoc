@@ -29,8 +29,8 @@
                   <Label fx:id="lbl_tel" layoutX="14.0" layoutY="186.0" text="Téléphone : " />
                   <Label fx:id="lbl_comment" layoutX="340.0" layoutY="14.0" text="Commentaire : " />
                   <TextArea fx:id="txt_comment" layoutX="253.0" layoutY="40.0" prefHeight="270.0" prefWidth="276.0" />
-                  <Button fx:id="btn_comment" layoutX="17.0" layoutY="235.0" mnemonicParsing="false" text="Enregistrer commentaire" />
-                  <Label fx:id="lbl_saved" layoutX="74.0" layoutY="276.0" text="Enregistré">
+                  <Button fx:id="btn_comment" onAction="#saveAction" layoutX="17.0" layoutY="235.0" mnemonicParsing="false" text="Enregistrer commentaire" />
+                  <Label fx:id="lbl_saved" layoutX="74.0" layoutY="276.0" text="Enregistré" visible="false">
                      <font>
                         <Font name="System Italic" size="12.0" />
                      </font>

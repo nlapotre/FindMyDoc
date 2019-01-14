@@ -89,7 +89,7 @@ public class Appointment {
 		String res = "";
 		 try {
 			Patient patient = api.getPatientInfos(this.patientId);
-			res = "Patient : "+ patient.getLastName()+ " " + patient.getFirstName() + "\n Heure du rdv : " + String.valueOf(this.appTime) + "h le " + this.appDate + " \n Commentaire : " + this.comment; 
+			res = "Patient : "+ patient.getLastName()+ " " + patient.getFirstName() + "\n Heure du rdv : " + String.valueOf(this.appTime) + "h le " + this.appDate; 
 			
 		} catch (ParseException e) {
 			e.printStackTrace();
@@ -111,6 +111,14 @@ public class Appointment {
 		}
 		return false; 
 	}
+
+
+	public void setComment(String comment) {
+		this.comment = comment;
+	}
+
+
+	
 	
 	
 }

@@ -137,7 +137,30 @@ public Patient getPatientInfos(int patientId) throws ParseException{
 	}
 public boolean modifyComment(Appointment appointment) {
 	
-	return false;
+	WebResource webResource = this.client.resource(this.url + "/appointment/updateComment");
+	 
+	//Parameters
+    String input = "{\"doctorId\":\""+appointment.getDoctorId()+"\",\"patientId\":\""+appointment.getPatientId()+"\",\"appDate\":\""+appointment.getAppDate()+"\",\"appTime\":\""+appointment.getAppTime()+"\",\"comment\":\""+appointment.getComment()+"\"}";
+    
+    ClientResponse response = webResource.type("application/json").post(ClientResponse.class, input);
+
+    if (response.getStatus() != 201) {
+        System.out.println("Failed : HTTP error code : " + response.getStatus());
+        
+        Alert alert = new Alert(AlertType.ERROR);
+        //String error= response.getEntity(String.class);
+   	 	alert.setTitle("Erreur");
+        alert.setHeaderText("Modification impossible");
+        alert.setContentText("Réessayez plus tard");
+        alert.showAndWait();
+        return false;
+    }
+
+    //System.out.println("Output from Server .... \n");
+   // String output = response.getEntity(String.class);
+    //System.out.println(output);
+    return true;
+	
 }
 public List<Patient> getPatients(int doctorId) throws ParseException {
 	WebResource webResource = this.client.resource(this.url + "/doctorPatient/getPatients?id="+doctorId);

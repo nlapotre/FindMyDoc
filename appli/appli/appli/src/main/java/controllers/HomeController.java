@@ -85,7 +85,7 @@ public class HomeController implements Initializable {
 		 DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 		 String myDate = dateFormat.format(today);
 		 int doctorId = (Integer) lstView_app.getScene().getWindow().getUserData();
-		 System.out.println("Args = " + myDate + " | " + doctorId );
+		 //System.out.println("Args = " + myDate + " | " + doctorId );
 		 List<Appointment> appList = app.getAppointmentsForTheDay(myDate, doctorId);
 		 
 	     lstView_app.getItems().setAll(appList);
@@ -107,10 +107,15 @@ public class HomeController implements Initializable {
 
 
 			pane_appInfos.setVisible(true);
+			lbl_saved.setVisible(false);
 		}
 	}
 	
 	public void saveAction(ActionEvent event){
+		Api api = new Api();
+		Appointment app = lstView_app.getSelectionModel().getSelectedItem();
+		app.setComment(txt_comment.getText());
+		if(api.modifyComment(app))
 			lbl_saved.setVisible(true);
 		  	 
 	   }

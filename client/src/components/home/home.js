@@ -16,12 +16,12 @@ export class Home extends React.Component {
         <Grid className="myGrid">
                     <Row>
                       <Col xs={6}>
-                        <Thumbnail href="#" alt="171x180" src={listRdv}>
+                        <Thumbnail className="thumb" href="/listRdv" alt="171x180" src={listRdv}>
                         <h3>Voir mes rendez-vous</h3>
                         </Thumbnail>
                       </Col>
                       <Col xs={6}>
-                        <Thumbnail href="/rdv" alt="171x180" src={rdv} >
+                        <Thumbnail className="thumb" href="/rdv" alt="171x180" src={rdv} >
                         <h3>Prendre un rendez-vous</h3>
                         </Thumbnail>
                       </Col>

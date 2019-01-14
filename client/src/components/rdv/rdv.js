@@ -23,7 +23,7 @@ export class Rdv extends React.Component {
   }
   renderDoctors(){
     return this.state.doctors.map((doctor, index) => {
-      return( <ListGroupItem onClick={this.doctorRdv.bind(this, doctor.id)} key={index}>{doctor.firstName}</ListGroupItem>);
+      return( <ListGroupItem onClick={this.doctorRdv.bind(this, doctor.id)} key={index}>{doctor.lastName}</ListGroupItem>);
     });
   }
 

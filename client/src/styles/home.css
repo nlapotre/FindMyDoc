@@ -1,3 +1,9 @@
 .myGrid{
   horizontal-align: center !important;
+  margin-bottom: 100px !important;
+  margin-left: 220px !important;
+}
+.thumb{
+  height: 400px !important;
+  width: 450px !important;
 }
