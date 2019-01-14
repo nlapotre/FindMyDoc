@@ -84,13 +84,25 @@ module.exports = {
   },
 
   getDoctors: (req, res) => {
-    models.Doctor.findAll({
-      attributes: ['id', 'firstName', 'lastName', 'specialty']
-    }).then((doctors) => {
-      res.status(201).json(doctors);
-    }).catch((err)=> {
-      res.status(404).json({'error': 'could not find doctors'});
-    });
+    if(req.query.specialty === ""){
+      models.Doctor.findAll({
+        attributes: ['id', 'firstName', 'lastName', 'specialty']
+      }).then((doctors) => {
+        res.status(201).json(doctors);
+      }).catch((err)=> {
+        res.status(404).json({'error': 'could not find doctors'});
+      });
+    }else{
+      models.Doctor.findAll({
+        attributes: ['id', 'firstName', 'lastName', 'specialty'],
+        where: {specialty: req.query.specialty}
+      }).then((doctors) => {
+        res.status(201).json(doctors);
+      }).catch((err)=> {
+        res.status(404).json({'error': 'could not find doctors'});
+      });
+    }
+
   },
 
   getDoctorInfos: (req, res) =>{

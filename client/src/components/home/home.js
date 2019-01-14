@@ -8,7 +8,10 @@ import '../../styles/home.css';
 
 
 export class Home extends React.Component {
-
+  constructor(props){
+    super(props);
+    localStorage.setItem('filtre', "");
+  }
     render() {
         return(
             <div className="Home" >

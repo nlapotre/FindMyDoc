@@ -16,8 +16,8 @@ export default {
     register : function(send){
         return axios.post(burl + '/api/patient/register',send,{headers: headers})
     },
-    getDoctors : function(){
-      return fetch(burl + '/api/doctor/all', {},
+    getDoctors : function(filtre){
+      return fetch(burl + '/api/doctor/all?specialty=' + filtre, {},
        {headers: headers})
     },
     getAppointments : function(patientId){

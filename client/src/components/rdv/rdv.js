@@ -12,12 +12,12 @@ export class Rdv extends React.Component {
     this.state = {
       'doctors': []
     }
-    this.getDoctors();
+    this.getDoctors(localStorage.getItem('filtre'));
   }
 
 
-  getDoctors(){
-      API.getDoctors()
+  getDoctors(filtre){
+      API.getDoctors(filtre)
       .then(res => res.json())
       .then(res => this.setState({'doctors': res}));
   }
@@ -33,14 +33,22 @@ export class Rdv extends React.Component {
       window.location = "/rdv/doctor";
 
   }
+  reload(str){
+    localStorage.setItem('filtre', str);
+    window.location="/rdv";
+  }
 
     render() {
         return(
             <div className="Login" >
                 <h1>Choisissez un médecin</h1>
 
-
-
+                <Button onClick={this.reload.bind(this, "Généraliste")}>Généralistes</Button>
+                <Button onClick={this.reload.bind(this, "Dentiste")}>Dentistes</Button>
+                <Button onClick={this.reload.bind(this, "Kinésithérapeute")}>Kinésithérapeutes</Button>
+                <Button onClick={this.reload.bind(this, "Chirurgien")}>Chirurgiens</Button>
+                <p></p>
+                <Button onClick={this.reload.bind(this, "")}>Réinitialiser la recherche</Button>
                 <Panel className="homePanel" bsStyle="primary">
                     <Panel.Heading >
                       <Panel.Title componentClass="h3">Panel heading</Panel.Title>
